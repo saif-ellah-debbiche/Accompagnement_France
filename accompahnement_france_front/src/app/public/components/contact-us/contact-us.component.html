@@ -1,0 +1,214 @@
+<section #contactSection class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-background">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 space-y-4">
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground text-balance">
+        Contactez-nous
+      </h2>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-pretty">
+        Une question ? Besoin d'informations ? Notre équipe est à votre écoute pour vous accompagner.
+      </p>
+    </div>
+
+    <!-- Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Contact Form -->
+      <div class="lg:col-span-2">
+        <div class="p-8 bg-card border-border rounded-lg border">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)" class="space-y-6">
+            
+            <!-- Name and Email Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <!-- Name Field -->
+              <div class="space-y-2">
+                <label for="name" class="text-sm font-medium text-card-foreground">
+                  Prénom
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Votre nom"
+                  formControlName="firstName"
+                  name="firstName"
+                  [class.border-red-500]="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched"
+                  [class.bg-red-50]="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched"
+
+                  required
+                  class="flex h-10 w-full rounded-lg  mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                />
+                <p *ngIf="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched" class="text-red-500 text-sm">
+      Le Prénom est requis
+    </p>
+              </div>
+              <div class="space-y-2">
+                <label for="name" class="text-sm font-medium text-card-foreground">
+                  Nom de famille
+                </label>
+                <input
+                  id="lastName"
+                  type="text"
+                  placeholder="Votre nom"
+                  formControlName="lastName"
+                  name="lastName"
+                  [class.border-red-500]="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched"
+                  [class.bg-red-50]="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched"
+
+                  required
+                  class="flex h-10 w-full rounded-lg  mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                />
+                <p *ngIf="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched" class="text-red-500 text-sm">
+      Le Nom de famille est requis
+    </p>
+              </div>
+
+              
+            </div>
+<!-- Email Field -->
+              <div class="space-y-2">
+                <label for="email" class="text-sm font-medium text-card-foreground">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="votre@email.com"
+                  name="email"
+                  formControlName="email"
+                  [class.border-red-500]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+                  [class.bg-red-50]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+                  required
+                  class="flex h-10 w-full rounded-lg mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                />
+                <p *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-red-500 text-sm">
+      Email invalide
+    </p>
+              </div>
+            <!-- Phone Field -->
+            <div class="space-y-2">
+              <label for="phone" class="text-sm font-medium text-card-foreground">
+                Téléphone
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                placeholder="+33 6 12 34 56 78"
+                name="phone"
+                formControlName="phone"
+                [class.border-red-500]="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+                [class.bg-red-50]="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+                class="flex h-10 w-full rounded-lg  mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              />
+               <p *ngIf="contactForm.get('phone')?.errors?.['required'] && contactForm.get('phone')?.touched">
+  Le téléphone est requis
+</p>
+
+<p *ngIf="contactForm.get('phone')?.errors?.['pattern'] && contactForm.get('phone')?.touched">
+  Numéro de téléphone invalide
+</p>
+            </div>
+            <!-- Service Field -->
+            <div class="space-y-2">
+              <label for="service" class="text-sm font-medium text-card-foreground">
+                Je suis intéressé(e) par
+              </label>
+              <select
+                id="service"
+                type=""
+                name="wantedService"
+                formControlName="wantedService"
+                [class.border-red-500]="contactForm.get('wantedService')?.invalid && contactForm.get('wantedService')?.touched"
+                [class.bg-red-50]="contactForm.get('wantedService')?.invalid && contactForm.get('wantedService')?.touched"
+                class="flex h-10 w-full rounded-lg   mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="" disabled selected>
+              Choisissez une option
+            </option>
+            <option *ngFor="let service of services" [value]="service.title">
+            {{ service.title}}
+            </option>
+              </select>
+            </div>
+
+            <!-- Message Field -->
+            <div class="space-y-2">
+              <label for="message" class="text-sm font-medium text-card-foreground">
+                Message
+              </label>
+              <textarea
+                id="message"
+                placeholder="Décrivez votre situation ou votre besoin..."
+                rows="6"
+                name="message"
+                required
+                class="flex min-h-[80px] w-full rounded-lg  mt-2 border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer h-12 px-8 text-base w-full sm:w-auto "
+            >
+              Envoyer le message
+            </button>
+          </form>
+           <p class="font-medium mt-2">En soumettant ce formulaire, vous acceptez d'être contacté par Mon Dossier Français concernant nos services.</p>
+        </div>
+       
+      </div>
+
+      <!-- Contact Info Cards -->
+      <div class="space-y-6">
+        
+        <!-- Email Card -->
+        <div class="p-6 space-y-4 bg-card border-border rounded-lg border">
+          <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <lucide-angular 
+              [img]="MailIcon" 
+              class="w-6 h-6 text-primary"
+            ></lucide-angular>
+          </div>
+          <div>
+            <h3 class="font-semibold text-card-foreground mb-2">Email</h3>
+            <p class="text-muted-foreground text-sm">{{owner.contact.email}}</p>
+          </div>
+        </div>
+
+        <!-- Phone Card -->
+        <div class="p-6 space-y-4 bg-card border-border rounded-lg border">
+          <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <lucide-angular 
+              [img]="PhoneIcon" 
+              class="w-6 h-6 text-primary"
+            ></lucide-angular>
+          </div>
+          <div>
+            <h3 class="font-semibold text-card-foreground mb-2">Téléphone</h3>
+            <p class="text-muted-foreground text-sm">{{owner.contact.phone}}</p>
+          </div>
+        </div>
+
+        <!-- Address Card -->
+        <div class="p-6 space-y-4 bg-card border-border rounded-lg border">
+          <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <lucide-angular 
+              [img]="MapPinIcon" 
+              class="w-6 h-6 text-primary"
+            ></lucide-angular>
+          </div>
+          <div>
+            <h3 class="font-semibold text-card-foreground mb-2">Adresse</h3>
+            <p class="text-muted-foreground text-sm">
+              {{owner.location.city}}<br>
+                {{owner.location.country}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+       
+    </div>
+   
+  </div>
+</section>

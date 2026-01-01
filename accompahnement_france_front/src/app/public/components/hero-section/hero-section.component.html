@@ -1,0 +1,26 @@
+<section
+    class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-secondary/30 to-background px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center space-y-8 py-20">
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-balance text-foreground tracking-tight">
+            {{hero.title}}
+            <span class="block mt-2 text-primary">  {{hero.highlight}}</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">
+            {{hero.heroSubtitle}}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-2 justify-center items-center pt-4">
+            <app-button size="lg"  (click)="onClickServices()">
+                Découvrir nos services
+            </app-button>
+            <app-button size="lg" variant="outline" (click)="onClickContact()" >
+                Nous contacter
+            </app-button>
+        </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <lucide-icon [name]="icons.ChevronDown" class="w-6 h-6 text-muted-foreground"></lucide-icon>
+    </div>
+</section>

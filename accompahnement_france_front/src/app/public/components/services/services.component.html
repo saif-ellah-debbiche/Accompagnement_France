@@ -1,0 +1,28 @@
+<section #servicesSection class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground text-balance">Nos services</h2>
+            <p class="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-pretty">
+                Des solutions adaptées à chaque situation pour vous accompagner dans toutes vos démarches
+                administratives en
+                France.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div *ngFor="let service of services; let i = index" (click)="scrollToContactFn()"
+                class="p-6 space-y-4 hover:shadow-lg transition-all hover:-translate-y-1 bg-card border-border rounded-lg border cursor-pointer">
+                <div class="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+                    <lucide-angular [img]="service.icon" class="w-6 h-6 text-accent-foreground"></lucide-angular>
+                </div>
+                <h3 class="text-lg font-semibold text-card-foreground">{{ service.title }}</h3>
+                <p class="text-muted-foreground leading-relaxed text-sm">{{ service.description }}</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <app-button size="lg" variant="outline" class="text-base px-8 py-6 rounded-lg bg-transparent">
+                Voir tous nos services
+            </app-button>
+        </div>
+    </div>
+</section>
