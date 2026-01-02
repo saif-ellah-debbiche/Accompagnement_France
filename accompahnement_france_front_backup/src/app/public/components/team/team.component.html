@@ -1,0 +1,21 @@
+<section #teamSection class="py-20 bg-muted/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 space-y-4">
+          <h2 class="font-serif text-3xl sm:text-4xl text-foreground">Notre Équipe</h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Des professionnels engagés pour faciliter votre installation en France.
+          </p>
+        </div>
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div *ngFor="let member of team" 
+       class="p-8 text-center bg-card border-border hover:shadow-lg transition-shadow rounded-lg border">
+    <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+      <lucide-icon [name]="User" class="w-10 h-10 text-primary"></lucide-icon>
+    </div>
+    <h3 class="font-semibold text-xl mb-1">{{ member.name }}</h3>
+    <p class="text-primary text-sm font-medium mb-4">{{ member.role }}</p>
+    <p class="text-muted-foreground text-sm leading-relaxed">{{ member.bio }}</p>
+  </div>
+</div>
+      </div>
+    </section>
