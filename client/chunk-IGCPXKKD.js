@@ -1,0 +1,1 @@
+import{c as e,k as c}from"./chunk-DQQ3PNPU.js";var r=class o{scrollToSectionSubject=new e;scrollToSection$=this.scrollToSectionSubject.asObservable();scrollTo(t){this.scrollToSectionSubject.next(t)}static \u0275fac=function(i){return new(i||o)};static \u0275prov=c({token:o,factory:o.\u0275fac,providedIn:"root"})};export{r as a};
