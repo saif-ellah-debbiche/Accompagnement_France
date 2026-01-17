@@ -29,6 +29,9 @@ jobs:
       - name: Build backoffice
         run: |
           cd accompahnement_france_front
+          mkdir -p projects/admin/src/environments
+          echo "export const environment = { production: true };" > projects/admin/src/environments/environment.prod.ts
+          
           npx ng build admin --base-href /${{ github.event.repository.name }}/admin/
 
       - name: Organize Deployment Folder
