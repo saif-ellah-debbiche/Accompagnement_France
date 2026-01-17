@@ -1,13 +1,19 @@
 {
   "name": "accompahnement-france-front",
   "version": "0.0.0",
-  "scripts": {
+   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "build:ghpages": "ng build --configuration production --base-href /Accompagnement_France/"
+    "start": "ng serve client --port 4201",
+    "start:client": "ng serve client --port 4201",
+    "start:admin": "ng serve admin --port 4200",
+    "build": "ng build client --configuration production",
+    "build:client": "ng build client --configuration production",
+    "build:admin": "ng build admin --configuration production",
+    "build:all": "npm run build:client && npm run build:admin",
+    "watch": "ng build client --watch --configuration development",
+    "test": "ng test client",
+    "test:client": "ng test client",
+    "test:admin": "ng test admin"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,6 @@
+<div class="flex bg-background">
+      <app-left-side-bar [navItems]="navigationItems" (colapsedEvent)="colapseSideBar()"></app-left-side-bar>
+      <main [class]="'flex-1 p-8 transition-all duration-300 min-h-screen ' + (sidebarCollapsed ? 'ml-16' : 'ml-64')">
+        <router-outlet></router-outlet>
+      </main>
+    </div>

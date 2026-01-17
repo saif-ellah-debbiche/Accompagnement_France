@@ -1,0 +1,194 @@
+<app-confirmation-dialog
+      [isOpen]="showSaveDialog"
+      title= {{dialogTitle}}
+      description={{dialogDescription}}
+      confirmText={{dialogConfirm}}
+      [showContent]="true"
+      (confirm)="handleSave()"
+      (cancel)="showSaveDialog = false">
+      <!-- Custom content inside dialog -->
+      <div class="rounded-md border border-border bg-muted/30 p-3 text-accent-foreground">
+        {{dialogContent}}
+      </div>
+    </app-confirmation-dialog>
+
+<div class="flex-1 space-y-8 p-8 pt-6">
+      <!-- Header -->
+      <div class="flex items-center justify-between space-y-2">
+        <h2 class="text-3xl font-bold tracking-tight text-foreground">Paramètres</h2>
+        <button 
+          (click)="openSaveDialog()"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+          <lucide-icon [img]="Save" [size]="16" ></lucide-icon>
+          Enregistrer les modifications
+        </button>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Appearance Section -->
+        <app-card specialstyles="border-border/50 bg-card/50">
+          <app-card-header>
+            <app-card-title specialstyles="flex items-center gap-2">
+              <lucide-icon [img]="Sun" [size]="20" class="text-primary"></lucide-icon>
+              Apparence
+            </app-card-title>
+            <p class="text-sm text-muted-foreground mt-1.5">
+              Personnalisez l'interface de votre interface d'administration.
+            </p>
+          </app-card-header>
+          <app-card-content specialstyles="space-y-6">
+            <div class="space-y-4">
+              <label class="text-sm font-medium leading-none">Thème de l'interface</label>
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Light Theme Option -->
+                <div>
+                  <input 
+                    type="radio" 
+                    id="light" 
+                    name="theme" 
+                    (ngModelChange)="onThemeChange($event)"
+                    value="light"
+                    [(ngModel)]="theme"
+                    class="peer sr-only" />
+                  <label 
+                    for="light"
+                    class="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer transition-colors peer-checked:border-primary">
+                    <lucide-icon [img]="Sun" [size]="24" class="mb-3"></lucide-icon>
+                    <span class="text-sm font-medium">Clair</span>
+                  </label>
+                </div>
+
+                <!-- Dark Theme Option -->
+                <div>
+                  <input 
+                    type="radio" 
+                    id="dark" 
+                    name="theme" 
+                    value="dark"
+                    [(ngModel)]="theme"
+                    (ngModelChange)="onThemeChange($event)"
+                    class="peer sr-only" />
+                  <label 
+                    for="dark"
+                    class="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer transition-colors peer-checked:border-primary">
+                    <lucide-icon [img]="Moon" [size]="24" class="mb-3"></lucide-icon>
+                    <span class="text-sm font-medium">Sombre</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </app-card-content>
+        </app-card>
+
+        <!-- Data Retention Section -->
+        <app-card specialstyles="border-border/50 bg-card/50">
+          <app-card-header>
+            <app-card-title specialstyles="flex items-center gap-2">
+              <lucide-icon [img]="Clock" [size]="20" class="text-primary"></lucide-icon>
+              Conservation des données
+            </app-card-title>
+            <p class="text-sm text-muted-foreground mt-1.5">
+              Gérez la durée de vie des demandes terminées.
+            </p>
+          </app-card-header>
+          <app-card-content specialstyles="space-y-6">
+            <div class="space-y-4">
+              <!-- Retention Period Select -->
+              <div class="grid gap-2">
+                <label for="retention" class="text-sm font-medium leading-none">
+                  Délai avant archivage/suppression
+                </label>
+                <select
+                  id="retention"
+                  [(ngModel)]="retentionPeriod"
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                  <option value="30">30 jours</option>
+                  <option value="90">90 jours</option>
+                  <option value="180">6 mois</option>
+                </select>
+                <p class="text-xs text-muted-foreground">
+                  Temps écoulé après qu'une demande soit marquée comme "Terminée".
+                </p>
+              </div>
+
+              <!-- Separator -->
+              <div class="border-t border-border"></div>
+
+              <!-- Cleanup Action Radio Group -->
+              <div class="space-y-4">
+                <label class="text-sm font-medium leading-none">Action post-délais</label>
+                <div class="grid gap-4">
+                  <div class="flex items-start space-x-3">
+                    <input
+                      type="radio"
+                      id="DELETE"
+                      name="cleanupAction"
+                      value="DELETE"
+                      [(ngModel)]="cleanupAction"
+                      class="mt-1 h-4 w-4 border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2" />
+                    <div class="grid gap-1.5">
+                      <label for="DELETE" class="text-sm font-semibold cursor-pointer">
+                        Suppression définitive
+                      </label>
+                      <p class="text-sm text-muted-foreground">
+                        Toutes les données de la demande (nom, contact, description) seront effacées de la base de données.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Anonymize Option -->
+                  <div class="flex items-start space-x-3">
+                    <input
+                      type="radio"
+                      id="ANONYMIZE"
+                      name="cleanupAction"
+                      value="ANONYMIZE"
+                      [(ngModel)]="cleanupAction"
+                      class="mt-1 h-4 w-4 border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2" />
+                    <div class="grid gap-1.5">
+
+                      <label for="ANONYMIZE" class="text-sm font-semibold cursor-pointer">
+                        Anonymisation pour statistiques
+                      </label>
+                      <p class="text-sm text-muted-foreground">
+                        Les informations personnelles sont supprimées, mais le type de service et les dates sont conservés pour vos rapports.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </app-card-content>
+        </app-card>
+
+        <!-- Security & Privacy Section -->
+        <app-card specialstyles="border-border/50 bg-card/50 md:col-span-2">
+          <app-card-header>
+            <app-card-title specialstyles="flex items-center gap-2">
+              <lucide-icon [img]="ShieldCheck" [size]="20" class="text-primary"></lucide-icon>
+              Sécurité & Confidentialité
+            </app-card-title>
+            <p class="text-sm text-muted-foreground mt-1.5">
+              Aperçu des protocoles de protection des données.
+            </p>
+          </app-card-header>
+          <app-card-content>
+            <div class="grid gap-4 text-sm text-muted-foreground md:grid-cols-3">
+              <div class="rounded-lg border border-border/40 p-3">
+                <span class="font-semibold text-foreground">Conformité RGPD</span>
+                <p class="mt-1">Les données sont stockées sur des serveurs sécurisés en Europe.</p>
+              </div>
+              <div class="rounded-lg border border-border/40 p-3">
+                <span class="font-semibold text-foreground">Chiffrement</span>
+                <p class="mt-1">Toutes les communications et données sensibles sont chiffrées au repos.</p>
+              </div>
+              <div class="rounded-lg border border-border/40 p-3">
+                <span class="font-semibold text-foreground">Accès restreint</span>
+                <p class="mt-1">Seuls les administrateurs authentifiés peuvent accéder aux demandes.</p>
+              </div>
+            </div>
+          </app-card-content>
+        </app-card>
+      </div>
+    </div>
+    

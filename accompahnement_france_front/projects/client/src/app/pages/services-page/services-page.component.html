@@ -1,0 +1,42 @@
+<main class="min-h-screen">
+      <!-- Hero Section -->
+      <section class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center space-y-4">
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground text-balance">
+              Tous nos services
+            </h1>
+            <p class="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-pretty">
+              Découvrez l'ensemble de nos solutions d'accompagnement pour vous aider dans toutes vos démarches
+              administratives en France.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Grid -->
+      <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <app-service-card 
+              *ngFor="let service of services$ | async ; let i = index" 
+              [service]="service">
+            </app-service-card>
+          </div>
+
+          <!-- CTA Section -->
+          <div class="mt-16 text-center space-y-6">
+            <h3 class="text-2xl font-semibold text-foreground">Prêt à commencer?</h3>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Contactez-nous aujourd'hui pour discuter de vos besoins et trouver la solution adaptée à votre situation.
+            </p>
+            <a 
+              [routerLink]="['/']" fragment="constact-us"
+              fragment="contact"
+              class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>

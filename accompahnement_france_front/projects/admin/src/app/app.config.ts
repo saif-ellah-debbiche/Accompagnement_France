@@ -1,0 +1,22 @@
+import { ApplicationConfig, ErrorHandler, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { refreshInterceptor } from './core/interceptors/refresh.interceptor';
+import { baseURlInterceptor } from './core/interceptors/base-url.interceptor';
+import { GlobalErrorHandler } from './core/error-handling/global-error-handler';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),provideHttpClient(
+      withInterceptors([
+        baseURlInterceptor,
+        authInterceptor,
+        refreshInterceptor
+      ],
+    ),      
+    ),
+  { provide: ErrorHandler, useClass: GlobalErrorHandler }]
+};

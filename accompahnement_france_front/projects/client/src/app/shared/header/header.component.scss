@@ -1,0 +1,21 @@
+/* header.component.css */
+
+/* If you need any component-specific styles, add them here */
+/* Most styling is handled by Tailwind classes in the template */
+
+/* Optional: Custom backdrop blur fallback for older browsers */
+header {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Optional: Smooth transition for sticky header */
+header {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Active link styling if routerLinkActive isn't enough */
+a.active {
+  color: hsl(var(--primary));
+  font-weight: 500;
+}

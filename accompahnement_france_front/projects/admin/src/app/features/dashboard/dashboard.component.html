@@ -1,0 +1,60 @@
+<app-header [pageTitle]="title"  [description]="description"></app-header>
+<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+  <app-card *ngFor="let stat of stats" specialstyles="bg-card border-border/50">
+    <app-card-header specialstyles="flex flex-row items-center justify-between space-y-0 pb-2">
+      <app-card-title specialstyles="text-sm font-medium text-muted-foreground">
+        {{ stat.title }}
+      </app-card-title>
+      <lucide-icon [img]="stat.icon" [size]="16" class="text-muted-foreground"></lucide-icon>
+    </app-card-header>
+    <app-card-content>
+      <div class="text-2xl font-bold">{{ stat.value }}</div>
+      <p class="text-xs text-muted-foreground mt-1">{{ stat.description }}</p>
+    </app-card-content>
+  </app-card>
+</div>
+
+<!-- Activity & Services Grid -->
+<div class="grid gap-4 md:grid-cols-2 mt-4">
+  <!-- Recent Activity Card -->
+  <app-card specialstyles="lg:col-span-4 bg-card border-border/50">
+    <app-card-header>
+      <app-card-title specialstyles="text-lg">Activité récente</app-card-title>
+    </app-card-header>
+    <app-card-content>
+      <div class="space-y-4">
+        <div *ngFor="let item of recentActivity" class="flex items-center gap-4">
+          <div class="h-9 w-9 rounded-full bg-muted flex items-center justify-center">
+            <lucide-icon [img]="Inbox" [size]="16" class="text-muted-foreground"></lucide-icon>
+          </div>
+          <div class="flex-1 space-y-1">
+            <p class="text-sm font-medium">{{ item.title }}</p>
+            <p class="text-xs text-muted-foreground">{{ item.time }}</p>
+          </div>
+          <div class="text-xs text-muted-foreground">{{ item.id }}</div>
+        </div>
+      </div>
+    </app-card-content>
+  </app-card>
+
+  <!-- Popular Services Card -->
+  <app-card specialstyles="lg:col-span-3 bg-card border-border/50">
+    <app-card-header>
+      <app-card-title specialstyles="text-lg">Services Populaires</app-card-title>
+    </app-card-header>
+    <app-card-content>
+      <div class="space-y-6">
+        <div *ngFor="let service of services" class="space-y-2">
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-medium">{{ service.title }}</span>
+            <span class="text-muted-foreground">{{ service.count }}</span>
+          </div>
+          <div class="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+            <div [class]="'h-full ' + service.color" [style.width.%]="getPercentage(service.count)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card-content>
+  </app-card>
+</div>

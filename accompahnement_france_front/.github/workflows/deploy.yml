@@ -1,0 +1,50 @@
+name: Deploy Angular Apps
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          
+      - name: Install Dependencies
+        run: |
+          cd accompahnement_france_front
+          npm install
+
+      - name: Build Client app
+        run: |
+          cd accompahnement_france_front
+          npx ng build client --base-href /${{ github.event.repository.name }}/client/
+
+      - name: Build backoffice
+        run: |
+          cd accompahnement_france_front
+          npx ng build admin --base-href /${{ github.event.repository.name }}/admin/
+
+      - name: Organize Deployment Folder
+        run: |
+          mkdir -p deploy-folder
+          
+          cp -r accompahnement_france_front/dist/client/browser deploy-folder/client
+          cp -r accompahnement_france_front/dist/admin/browser deploy-folder/admin
+          
+          cp deploy-folder/client/index.html deploy-folder/client/404.html
+          cp deploy-folder/admin/index.html deploy-folder/admin/404.html
+          
+          echo '<!DOCTYPE html><html><body><h1>Project Portal</h1><ul><li><a href="./client/">Client App</a></li><li><a href="./admin/">Admin Backoffice</a></li></ul></body></html>' > deploy-folder/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: deploy-folder 
+          branch: gh-pages

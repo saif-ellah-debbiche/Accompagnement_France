@@ -1,0 +1,53 @@
+<header class="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <!-- Logo and Company Name -->
+    <a routerLink="/" class="flex items-center gap-3 px-4 mr-2">
+      <img
+        src="/assets/logo.png"
+        alt="Cabinet de conseil France Intégration"
+        width="48"
+        height="48"
+        class="w-12 h-12"
+      />
+      <div class="hidden sm:flex flex-col">
+        <span class="text-sm font-semibold text-primary">Cabinet de conseil</span>
+        <span class="text-xs text-muted-foreground">France Intégration</span>
+      </div>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a 
+        (click)="goToSection('hero')" [class.active]="(activeSection$ | async) === 'hero'"
+        routerLinkActive="text-primary"
+        class="text-sm text-foreground hover:text-primary transition-colors  cursor-pointer">
+        Accueil
+      </a>
+      <a 
+        (click)="goToSection('services')" [class.active]="(activeSection$ | async) === 'services'"
+        routerLinkActive="text-primary"
+        class="text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
+        Services
+      </a>
+      <a 
+        (click)="goToSection('about')" [class.active]="(activeSection$ | async) === 'about'"
+        routerLinkActive="text-primary"
+        class="text-sm text-foreground hover:text-primary transition-colors  cursor-pointer">
+        À propos
+      </a>
+      <a 
+        (click)="goToSection('team')" [class.active]="activeSection === 'team'"
+        routerLinkActive="text-primary"
+        class="text-sm text-foreground hover:text-primary transition-colors  cursor-pointer">
+        Équipe
+      </a>
+    </div>
+
+    <!-- CTA Button -->
+    <button 
+      (click)="scrollToSection('contact')"
+      class="ml-auto px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer">
+      Nous contacter
+    </button>
+  </nav>
+</header>
